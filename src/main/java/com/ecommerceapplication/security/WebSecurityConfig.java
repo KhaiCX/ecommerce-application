@@ -36,8 +36,8 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST).permitAll()
-                        .requestMatchers(SecurityConstants.SIGN_UP_URL).permitAll()
+                        .requestMatchers(HttpMethod.POST).authenticated()
+                        .requestMatchers(SecurityConstants.SIGN_UP_URL).authenticated()
                         .anyRequest().permitAll())
                 .addFilter(new JWTAuthenticationFilter(authenticationManager))
                 .addFilter(new JWTAuthenticationVerificationFilter(authenticationManager));
